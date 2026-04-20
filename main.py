@@ -45,7 +45,7 @@ def main():
             if part.function_call:
                 fn = part.function_call
                 
-                function_call_result = call_function(fn, verbose=args.verbose)
+                function_call_result = call_function(fn, verbose=True)
                 
                 if not function_call_result.parts:
                     raise Exception("Function call result has no parts.")
@@ -57,20 +57,17 @@ def main():
                 if func_response_obj.response is None:
                     raise Exception("function_response has no response data.")
                 
-               
                 function_results.append(function_call_result.parts[0])
                 
-           
-                if args.verbose:
-                    print(f"-> {func_response_obj.response}")
+                print(f"-> {func_response_obj.response}")
                     
     else:
         print(response.text)
 
-    if args.verbose:
-        print(f"User prompt: {args.user_prompt}")
-        print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
-        print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
+    # if args.verbose:
+    #     print(f"User prompt: {args.user_prompt}")
+    #     print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
+    #     print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
 
 if __name__ == "__main__":
     main()
